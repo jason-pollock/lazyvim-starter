@@ -1,52 +1,53 @@
 return {
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
+    -- add gruvbox
+    { "ellisonleao/gruvbox.nvim" },
 
-  {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    opts = { style = "moon" },
-  },
+    {
+        "folke/tokyonight.nvim",
+        lazy = true,
+        opts = { style = "moon" },
+    },
 
-  {
-    "catppuccin/nvim",
-    lazy = true,
-    opts = {
-      integrations = {
-        alpha = true,
-        cmp = true,
-        gitsigns = true,
-        illuminate = true,
-        indent_blankline = { enabled = true },
-        lsp_trouble = true,
-        mini = true,
-        native_lsp = {
-          enabled = true,
-          underlines = {
-            errors = { "undercurl" },
-            hints = { "undercurl" },
-            warnings = { "undercurl" },
-            information = { "undercurl" },
-          },
+    {
+        "catppuccin/nvim",
+        lazy = true,
+        opts = {
+            integrations = {
+                alpha = true,
+                cmp = true,
+                gitsigns = true,
+                illuminate = true,
+                indent_blankline = { enabled = true },
+                lsp_trouble = true,
+                mini = true,
+                native_lsp = {
+                    enabled = true,
+                    underlines = {
+                        errors = { "undercurl" },
+                        hints = { "undercurl" },
+                        warnings = { "undercurl" },
+                        information = { "undercurl" },
+                    },
+                },
+                navic = { enabled = true },
+                neotest = true,
+                noice = true,
+                notify = true,
+                nvimtree = true,
+                semantic_tokens = true,
+                telescope = true,
+                treesitter = true,
+                which_key = true,
+            },
         },
-        navic = { enabled = true },
-        neotest = true,
-        noice = true,
-        notify = true,
-        nvimtree = true,
-        semantic_tokens = true,
-        telescope = true,
-        treesitter = true,
-        which_key = true,
-      },
     },
-  },
 
-  -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
+    -- Configure LazyVim to load gruvbox
+    {
+        "LazyVim/LazyVim",
+        opts = {
+            -- colorscheme = "catppuccin",
+            colorscheme = "gruvbox",
+        },
     },
-  },
 }

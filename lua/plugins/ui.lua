@@ -116,9 +116,16 @@ return {
                         { "location", padding = { left = 0, right = 1 } },
                     },
                     lualine_z = {
-                        function()
-                            return " " .. os.date("%R")
-                        end,
+                        {
+                            function()
+                                return " " .. os.date("%R")
+                            end,
+                        },
+                        {
+                            function()
+                                return require("lsp-status").status()
+                            end,
+                        },
                     },
                 },
                 extensions = { "neo-tree", "lazy" },
@@ -129,7 +136,6 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         opts = {
-            -- char = "▏",
             char = "│",
             filetype_exclude = {
                 "help",
