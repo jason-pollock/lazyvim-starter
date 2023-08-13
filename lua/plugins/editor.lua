@@ -2,6 +2,7 @@ return {
     {
         "nvim-neo-tree/neo-tree.nvim",
         opts = {
+            close_if_last_window = true,
             sources = { "filesystem", "buffers", "git_status", "document_symbols" },
             open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
             enable_git_status = true,
@@ -192,21 +193,4 @@ return {
     },
 
     { "tpope/vim-repeat", event = "VeryLazy" },
-
-    {
-        "williamboman/mason.nvim",
-        opts = {
-            -- THIS IS A COOL WAY TO ADD SOMETHING TO AN ARRAY IN LUA
-            -- function(_, opts)
-            --     table.insert(opts.ensure_installed, "prettierd")
-            -- end,
-            ensure_installed = {
-                "stylua",
-                "shellcheck",
-                "intelephense",
-                "php-cs-fixer",
-                "shfmt",
-            },
-        },
-    },
 }

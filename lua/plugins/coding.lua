@@ -13,10 +13,16 @@ return {
     {
         "williamboman/mason.nvim",
         opts = {
+            -- THIS IS A COOL WAY TO ADD SOMETHING TO AN ARRAY IN LUA
+            -- function(_, opts)
+            --     table.insert(opts.ensure_installed, "prettierd")
+            -- end,
             ensure_installed = {
                 "stylua",
                 "shellcheck",
                 "intelephense",
+                "php-cs-fixer",
+                "shfmt",
             },
         },
     },

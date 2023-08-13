@@ -49,8 +49,93 @@ return {
             -- LSP Server Settings
             ---@type lspconfig.options
             servers = {
-                -- phpactor = {},
-                -- intelephense = {},
+                psalm = {},
+                phpactor = {},
+                intelephense = {
+                    settings = {
+                        intelephense = {
+                            stubs = {
+                                "apache",
+                                "bcmath",
+                                "bz2",
+                                "calendar",
+                                "com_dotnet",
+                                "com_dotnet",
+                                "Core",
+                                "ctype",
+                                "curl",
+                                "date",
+                                "dba",
+                                "dom",
+                                "enchant",
+                                "exif",
+                                "FFI",
+                                "fileinfo",
+                                "filter",
+                                "fpm",
+                                "ftp",
+                                "gd",
+                                "gettext",
+                                "gmp",
+                                "hash",
+                                "iconv",
+                                "imap",
+                                "intl",
+                                "json",
+                                "ldap",
+                                "libxml",
+                                "mbstring",
+                                "meta",
+                                "mysqli",
+                                "oci8",
+                                "odbc",
+                                "openssl",
+                                "pcntl",
+                                "pcre",
+                                "PDO",
+                                "pdo_ibm",
+                                "pdo_mysql",
+                                "pdo_pgsql",
+                                "pdo_sqlite",
+                                "pgsql",
+                                "Phar",
+                                "posix",
+                                "pspell",
+                                "readline",
+                                "Reflection",
+                                "session",
+                                "shmop",
+                                "SimpleXML",
+                                "snmp",
+                                "soap",
+                                "sockets",
+                                "sodium",
+                                "SPL",
+                                "sqlite3",
+                                "standard",
+                                "superglobals",
+                                "sysvmsg",
+                                "sysvsem",
+                                "sysvshm",
+                                "tidy",
+                                "tokenizer",
+                                "xml",
+                                "xmlreader",
+                                "xmlrpc",
+                                "xmlwriter",
+                                "xsl",
+                                "Zend OPcache",
+                                "zip",
+                                "zlib",
+                                "wordpress",
+                                "phpunit",
+                            },
+                            diagnostics = {
+                                enable = true,
+                            },
+                        },
+                    },
+                },
                 jsonls = {
                     -- lazy-load schemastore when needed
                     on_new_config = function(new_config)
@@ -66,12 +151,13 @@ return {
                         },
                     },
                 },
+                eslint = {
+                    settings = {
+                        -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+                        workingDirectory = { mode = "auto" },
+                    },
+                },
                 lua_ls = {
-                    -- mason = false, -- set to false if you don't want this server to be installed with mason
-                    -- Use this to add any additional keymaps
-                    -- for specific lsp servers
-                    ---@type LazyKeys[]
-                    -- keys = {},
                     settings = {
                         Lua = {
                             workspace = {
@@ -80,13 +166,43 @@ return {
                             completion = {
                                 callSnippet = "Replace",
                             },
+                            diagnostics = {
+                                globals = { "vim" },
+                            },
                         },
                     },
                 },
-                eslint = {
+                yamlls = {
+                    -- Have to add this for yamlls to understand that we support line folding
+                    capabilities = {
+                        textDocument = {
+                            foldingRange = {
+                                dynamicRegistration = false,
+                                lineFoldingOnly = true,
+                            },
+                        },
+                    },
+                    -- lazy-load schemastore when needed
+                    on_new_config = function(new_config)
+                        new_config.settings.yaml.schemas = new_config.settings.yaml.schemas or {}
+                        vim.list_extend(new_config.settings.yaml.schemas, require("schemastore").yaml.schemas())
+                    end,
                     settings = {
-                        -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-                        workingDirectory = { mode = "auto" },
+                        redhat = { telemetry = { enabled = false } },
+                        yaml = {
+                            keyOrdering = false,
+                            format = {
+                                enable = true,
+                            },
+                            validate = true,
+                            schemaStore = {
+                                -- Must disable built-in schemaStore support to use
+                                -- schemas from SchemaStore.nvim plugin
+                                enable = false,
+                                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                                url = "",
+                            },
+                        },
                     },
                 },
             },
@@ -94,13 +210,6 @@ return {
             -- return true if you don't want this server to be setup with lspconfig
             ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
             setup = {
-                -- example to setup with typescript.nvim
-                -- tsserver = function(_, opts)
-                --   require("typescript").setup({ server = opts })
-                --   return true
-                -- end,
-                -- Specify * to use this function as a fallback for any server
-                -- ["*"] = function(server, opts) end,
                 eslint = function()
                     vim.api.nvim_create_autocmd("BufWritePre", {
                         callback = function(event)
@@ -122,27 +231,16 @@ return {
                         end,
                     })
                 end,
+                -- example to setup with typescript.nvim
+                tsserver = function(_, opts)
+                    require("typescript").setup({ server = opts })
+                    return true
+                end,
+                -- Specify * to use this function as a fallback for any server
+                -- ["*"] = function(server, opts) end,
             },
         },
     },
-
-    -- {
-    --     "jose-elias-alvarez/null-ls.nvim",
-    --     opts = function()
-    --         local nls = require("null-ls")
-    --         return {
-    --             root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-    --             sources = {
-    --                 nls.builtins.formatting.stylua,
-    --                 nls.builtins.formatting.shfmt,
-    --                 nls.builtins.diagnostics.intelephense,
-    --                 nls.builtins.diagnostics.phpactor,
-    --                 nls.builtins.diagnostics.shellcheck,
-    --                 nls.builtins.diagnostics.prettierd,
-    --             },
-    --         }
-    --     end,
-    -- },
 
     { import = "lazyvim.plugins.extras.lang.typescript" },
 
@@ -151,4 +249,60 @@ return {
     { "folke/neodev.nvim", opts = {} },
 
     { "williamboman/mason-lspconfig.nvim", opts = nil },
+
+    {
+        "hrsh7th/cmp-nvim-lsp",
+        cond = function()
+            return require("lazyvim.util").has("nvim-cmp")
+        end,
+    },
+
+    {
+        "jose-elias-alvarez/null-ls.nvim",
+        opts = function()
+            local nls = require("null-ls")
+            return {
+                root_dir = require("null-ls.utils").root_pattern("composer.json", ".git", "package.json", "Makefile"),
+                sources = {
+                    -- Eslint
+                    nls.builtins.code_actions.eslint_d,
+                    nls.builtins.formatting.eslint_d.with({
+                        condition = function(utils)
+                            return utils.root_has_file({ ".eslintrc.js", ".eslintrc.json" })
+                        end,
+                    }),
+                    nls.builtins.diagnostics.eslint_d.with({
+                        condition = function(utils)
+                            return utils.root_has_file({ ".eslintrc.js", ".eslintrc.json" })
+                        end,
+                    }),
+
+                    -- Markdown
+                    nls.builtins.formatting.markdownlint,
+                    nls.builtins.diagnostics.markdownlint.with({
+                        extra_args = { "--disable", "line-length" },
+                    }),
+
+                    -- Spelling
+                    -- nls.builtins.diagnostics.prettierd,
+                    nls.builtins.completion.spell,
+                    nls.builtins.code_actions.cspell,
+                    nls.builtins.diagnostics.cspell,
+                    nls.builtins.diagnostics.shellcheck,
+
+                    -- PHP
+                    nls.builtins.diagnostics.phpcs.with({ -- Change how the php linting will work
+                        prefer_local = "vendor/bin",
+                        diagnostics_format = "#{m} (#{c}) [#{s}]", -- Makes PHPCS errors more readeable
+                    }),
+                    nls.builtins.formatting.phpcbf.with({ -- Use the local installation first
+                        prefer_local = "vendor/bin",
+                    }),
+
+                    nls.builtins.formatting.stylua,
+                    nls.builtins.formatting.shfmt,
+                },
+            }
+        end,
+    },
 }

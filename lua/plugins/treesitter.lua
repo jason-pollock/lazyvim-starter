@@ -29,6 +29,18 @@ return {
                 },
             },
         },
+        extra_opts = function(_, opts)
+            if type(opts.ensure_installed) == "table" then
+                vim.list_extend(opts.ensure_installed, {
+                    "typescript",
+                    "tsx",
+                    "yaml",
+                    "json",
+                    "json5",
+                    "jsonc",
+                })
+            end
+        end,
     },
 
     {
