@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- Additional config
-require("phpactor").setup({})
+-- require("phpactor").setup({})
 require("intelephense").setup({
     on_attach = function(client, bufnr)
         -- Enable (omnifunc) completion triggered by <c-x><c-o>

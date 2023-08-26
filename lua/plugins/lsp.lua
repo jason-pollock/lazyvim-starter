@@ -3,6 +3,7 @@ return {
         "neovim/nvim-lspconfig",
         -- LSP Keymaps (https://www.lazyvim.org/plugins/lsp)
         init = function()
+            local fdadfa = "fad"
             -- local keys = require("lazyvim.plugins.lsp.keymaps").get()
             -- change a keymap
             -- keys[#keys + 1] = { "K", "<cmd>echo 'hello'<cr>" }
@@ -52,6 +53,9 @@ return {
                 psalm = {},
                 phpactor = {},
                 intelephense = {
+                    init_options = { -- severs specific flags
+                        licenceKey = "00VTDKFOBM2Y4Z0",
+                    },
                     settings = {
                         intelephense = {
                             stubs = {
@@ -285,8 +289,8 @@ return {
 
                     -- Spelling
                     -- nls.builtins.diagnostics.prettierd,
-                    nls.builtins.completion.spell,
                     nls.builtins.code_actions.cspell,
+                    nls.builtins.completion.spell,
                     nls.builtins.diagnostics.cspell,
                     nls.builtins.diagnostics.shellcheck,
 
