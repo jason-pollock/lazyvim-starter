@@ -289,9 +289,9 @@ return {
 
                     -- Spelling
                     -- nls.builtins.diagnostics.prettierd,
-                    nls.builtins.code_actions.cspell,
-                    nls.builtins.completion.spell,
-                    nls.builtins.diagnostics.cspell,
+                    -- nls.builtins.code_actions.cspell,
+                    -- nls.builtins.completion.spell,
+                    -- nls.builtins.diagnostics.cspell,
                     nls.builtins.diagnostics.shellcheck,
 
                     -- PHP
