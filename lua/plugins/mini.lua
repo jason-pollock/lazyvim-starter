@@ -1,5 +1,10 @@
 return {
-    { "echasnovski/mini.nvim", version = false },
+    -- { "echasnovski/mini.nvim", version = false },
+
+    {
+        "echasnovski/mini.sessions",
+        opts = {},
+    },
 
     {
         "echasnovski/mini.pairs",
@@ -33,24 +38,6 @@ return {
                 end,
             },
         },
-    },
-
-    {
-        "echasnovski/mini.ai",
-        opts = function()
-            local ai = require("mini.ai")
-            return {
-                n_lines = 500,
-                custom_textobjects = {
-                    o = ai.gen_spec.treesitter({
-                        a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-                        i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-                    }, {}),
-                    f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
-                    c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
-                },
-            }
-        end,
     },
 
     {
@@ -89,7 +76,7 @@ return {
                 "            ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z",
                 "            ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    ",
                 "            ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       ",
-                "            ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z         ",
+                "            ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ zXXXXX    ",
                 "            ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║           ",
                 "            ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝           ",
             }, "\n")
@@ -119,6 +106,47 @@ return {
                 },
             }
             return config
+        end,
+    },
+
+    {
+        "echasnovski/mini.ai",
+        opts = function()
+            local ai = require("mini.ai")
+            return {
+                n_lines = 500,
+                custom_textobjects = {
+                    o = ai.gen_spec.treesitter({
+                        a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+                        i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+                    }, {}),
+                    f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
+                    c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+                },
+            }
+        end,
+    },
+
+    {
+        -- `opts` gets passed as the plugins `.setup({})`
+        -- Assignment to a function allows us to leverage advanced features such as variables and other functions
+        -- Otherwise `opts` can just be an object
+
+        "echasnovski/mini.hipatterns",
+        opts = function()
+            local hipatterns = require("mini.hipatterns")
+            return {
+                highlighters = {
+                    -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+                    fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+                    hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+                    todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+                    note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+                    -- Highlight hex color strings (`#rrggbb`) using that color
+                    hex_color = hipatterns.gen_highlighter.hex_color(),
+                },
+            }
         end,
     },
 }

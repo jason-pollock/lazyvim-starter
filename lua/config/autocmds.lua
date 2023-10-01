@@ -48,7 +48,11 @@ vim.api.nvim_create_autocmd("User", {
     end,
 })
 
---
+-- Above doesn't seem to work so lets try this one from https://www.reddit.com/r/neovim/comments/zyb6c3/automatically_backup_lazynvim_lockfiles/
+-- Also in that thread is this, from Folke themself:
+-- I also released a new feature today where you can restore a plugin to any commit you can see in :Lazy log.
+-- So if you want to restore a plugin to a given commit, move the cursor to the commit hash and press <r> to restore to that commit.
+-- This will also update the lockfile with that commit.
 vim.api.nvim_create_autocmd("User", {
     pattern = "LazySync",
     callback = function()
