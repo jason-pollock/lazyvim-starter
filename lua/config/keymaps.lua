@@ -97,6 +97,13 @@ keymap("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" })
 keymap("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
 keymap("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
 
+vim.keymap.set(
+    "n",
+    "<leader>sx",
+    require("telescope.builtin").resume,
+    { noremap = true, silent = true, desc = "Resume" }
+)
+
 vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', { desc = "Toggle Spectre" })
 vim.keymap.set(
     "n",

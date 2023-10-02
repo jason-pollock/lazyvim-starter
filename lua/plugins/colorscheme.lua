@@ -8,6 +8,8 @@ return {
         opts = { style = "moon" },
     },
 
+    { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
+
     {
         "catppuccin/nvim",
         lazy = true,
@@ -47,7 +49,9 @@ return {
         "LazyVim/LazyVim",
         opts = {
             -- colorscheme = "catppuccin",
-            colorscheme = "gruvbox",
+            -- colorscheme = "gruvbox",
+            colorscheme = "tokyonight",
+            -- colorscheme = "nightfly",
         },
     },
 }

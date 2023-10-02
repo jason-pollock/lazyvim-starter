@@ -320,4 +320,13 @@ return {
             },
         },
     },
+    {
+        "akinsho/bufferline.nvim",
+        opts = { -- Equivelant to `require(bufferline).setup(opts)`
+            options = {
+                diagnostics = "nvim_lsp",
+                always_show_bufferline = false,
+            },
+        },
+    },
 }

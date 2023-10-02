@@ -47,22 +47,28 @@ return {
 
     {
         "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
         opts = {
-            char = "│",
-            filetype_exclude = {
-                "help",
-                "alpha",
-                "dashboard",
-                "neo-tree",
-                "Trouble",
-                "lazy",
-                "mason",
-                "notify",
-                "toggleterm",
-                "lazyterm",
+            indent = {
+                char = "│",
             },
-            show_trailing_blankline_indent = false,
-            show_current_context = false,
+            whitespace = {
+                highlight = { "Function", "Label" },
+                remove_blankline_trail = true,
+            },
+            exclude = {
+                filetypes = {
+                    "alpha",
+                    "dashboard",
+                    "neo-tree",
+                    "Trouble",
+                    "lazy",
+                    "mason",
+                    "notify",
+                    "toggleterm",
+                    "lazyterm",
+                },
+            },
         },
     },
 
