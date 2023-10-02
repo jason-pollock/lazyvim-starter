@@ -93,7 +93,28 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+keymap("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" })
 keymap("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
 keymap("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+
+vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', { desc = "Toggle Spectre" })
+vim.keymap.set(
+    "n",
+    "<leader>sw",
+    '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
+    { desc = "Search current word" }
+)
+vim.keymap.set(
+    "v",
+    "<leader>sw",
+    '<esc><cmd>lua require("spectre").open_visual()<CR>',
+    { desc = "Search current word" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>sp",
+    '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
+    { desc = "Search on current file" }
+)
 
 return M

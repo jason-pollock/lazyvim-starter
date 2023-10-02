@@ -265,4 +265,59 @@ return {
             })
         end,
     },
+
+    ---------------
+    --- My Stuff --
+    ---------------
+
+    -- `opts` gets passed as the plugins `.setup({})`
+    -- Assignment to a function allows us to leverage advanced features such as variables and other functions
+    -- Otherwise `opts` can just be an object
+    {
+        "echasnovski/mini.hipatterns",
+        opts = function()
+            local hipatterns = require("mini.hipatterns")
+            return {
+                highlighters = {
+                    fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+                    hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+                    todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+                    note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+                    -- Highlight hex color strings (`#rrggbb`) using that color
+                    hex_color = hipatterns.gen_highlighter.hex_color(),
+                },
+            }
+        end,
+    },
+    -- This is the same as running `require('Sessions').setup()` with no parameters
+    {
+        "echasnovski/mini.sessions",
+        config = true,
+    },
+    -- Alternative way to fire `.setup`
+    {
+        "nvim-lualine/lualine.nvim",
+        config = function()
+            require("lualine").setup({
+                options = {
+                    icons_enabled = false,
+                    theme = "onedark",
+                },
+            })
+        end,
+    },
+    -- Picked this up from ToggleTerm help file
+    {
+        -- amongst your other plugins
+        { "akinsho/toggleterm.nvim", version = "", config = true },
+        -- or
+        {
+            "akinsho/toggleterm.nvim",
+            version = "",
+            opts = {
+                --[[ things you want to change go here]]
+            },
+        },
+    },
 }
