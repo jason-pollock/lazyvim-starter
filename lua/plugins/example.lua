@@ -329,4 +329,15 @@ return {
             },
         },
     },
+    -- options for neorg. This will automatically call `require("neorg").setup(opts)`
+    {
+        "nvim-neorg/neorg",
+        -- lazy-load on filetype
+        ft = "norg",
+        opts = {
+            load = {
+                ["core.defaults"] = {},
+            },
+        },
+    },
 }

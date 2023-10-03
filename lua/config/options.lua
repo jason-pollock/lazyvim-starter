@@ -35,7 +35,7 @@ opt.smartindent = true -- Insert indents automatically
 opt.shortmess:append({ W = true, I = true, c = true })
 opt.showmode = false -- Dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
-opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
+opt.signcolumn = "yes:2" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true -- Don't ignore case with capitals
 opt.spelllang = { "en_us" }
 opt.splitbelow = true -- Put new windows below current

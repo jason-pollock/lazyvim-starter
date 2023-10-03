@@ -15,17 +15,21 @@ return {
         opts = {
             -- options for vim.diagnostic.config()
             diagnostics = {
-                underline = true,
                 update_in_insert = false,
-                virtual_text = {
-                    spacing = 4,
-                    source = "if_many",
-                    -- prefix = "●",
-                    -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-                    -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-                    prefix = "icons",
-                },
+                underline = true,
+                -- virtual_text = {
+                --     spacing = 4,
+                --     source = "if_many",
+                --     -- prefix = "●",
+                --     -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+                --     -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+                --     prefix = "icons",
+                -- },
+                virtual_text = false,
                 severity_sort = true,
+                float = {
+                    source = true,
+                }
             },
             -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
             -- Be aware that you also will need to properly configure your LSP server to
@@ -59,83 +63,34 @@ return {
                     settings = {
                         intelephense = {
                             stubs = {
-                                "apache",
-                                "bcmath",
-                                "bz2",
-                                "calendar",
-                                "com_dotnet",
-                                "com_dotnet",
-                                "Core",
-                                "ctype",
-                                "curl",
-                                "date",
-                                "dba",
-                                "dom",
-                                "enchant",
-                                "exif",
-                                "FFI",
-                                "fileinfo",
-                                "filter",
-                                "fpm",
-                                "ftp",
-                                "gd",
-                                "gettext",
-                                "gmp",
-                                "hash",
-                                "iconv",
-                                "imap",
-                                "intl",
-                                "json",
-                                "ldap",
-                                "libxml",
-                                "mbstring",
-                                "meta",
-                                "mysqli",
-                                "oci8",
-                                "odbc",
-                                "openssl",
-                                "pcntl",
-                                "pcre",
-                                "PDO",
-                                "pdo_ibm",
-                                "pdo_mysql",
-                                "pdo_pgsql",
-                                "pdo_sqlite",
-                                "pgsql",
-                                "Phar",
-                                "posix",
-                                "pspell",
-                                "readline",
-                                "Reflection",
-                                "session",
-                                "shmop",
-                                "SimpleXML",
-                                "snmp",
-                                "soap",
-                                "sockets",
-                                "sodium",
-                                "SPL",
-                                "sqlite3",
-                                "standard",
-                                "superglobals",
-                                "sysvmsg",
-                                "sysvsem",
-                                "sysvshm",
-                                "tidy",
-                                "tokenizer",
-                                "xml",
-                                "xmlreader",
-                                "xmlrpc",
-                                "xmlwriter",
-                                "xsl",
-                                "Zend OPcache",
-                                "zip",
-                                "zlib",
-                                "wordpress",
-                                "phpunit",
+                                "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", "curl", "date",
+                                "dba", "dom", "enchant", "exif", "FFI", "fileinfo", "filter", "fpm", "ftp", "gd", "gettext",
+                                "gmp", "hash", "iconv", "imap", "intl", "json", "ldap", "libxml", "mbstring", "meta", "mysqli",
+                                "oci8", "odbc", "openssl", "pcntl", "pcre", "PDO", "pdo_ibm", "pdo_mysql", "pdo_pgsql", "pdo_sqlite", "pgsql",
+                                "Phar", "posix", "pspell", "readline", "Reflection", "session", "shmop", "SimpleXML", "snmp", "soap",
+                                "sockets", "sodium", "SPL", "sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm", "tidy",
+                                "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib",
+                                "wordpress", "acf-pro", "wordpress-seo", "phpunit",
                             },
                             diagnostics = {
                                 enable = true,
+                            },
+                            telemetry = {
+                                enabled = false,
+                            },
+                            completion = {
+                                fullyQualifyGlobalConstantsAndFunctions = false,
+                            },
+                            phpdoc = {
+                                returnVoid = false,
+                            },
+                            file = {
+                                maxSize = 3000000,
+                            },
+                            files = {
+                                exclude = {
+                                    "**/vendor/**",
+                                },
                             },
                         },
                     },
@@ -297,7 +252,7 @@ return {
                     -- PHP
                     nls.builtins.diagnostics.phpcs.with({ -- Change how the php linting will work
                         prefer_local = "vendor/bin",
-                        diagnostics_format = "#{m} (#{c}) [#{s}]", -- Makes PHPCS errors more readeable
+                        diagnostics_format = "#{m} (#{c}) [#{s}]", -- Makes PHPCS errors more readable
                     }),
                     nls.builtins.formatting.phpcbf.with({ -- Use the local installation first
                         prefer_local = "vendor/bin",

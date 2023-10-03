@@ -30,4 +30,28 @@ return {
         "nvim-pack/nvim-spectre",
         config = true,
     },
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            format_on_save = {
+                -- These options will be passed to conform.format()
+                timeout_ms = 500,
+                lsp_fallback = true,
+            },
+            formatters_by_ft = {
+                lua = { "stylua " },
+                -- Multiple formatters sequentially
+                python = { "isort", "black" },
+                -- Use a sublist to run only the first available formatter
+                javascript = { { "prettierd", "prettier" } },
+                bash = { "shellcheck", "beautysh", "shellharden", "shfmt" },
+                php = { "php-cs-fixer" },
+                json = { "jq" },
+                markdown = { "markdownlint" },
+                css = { "stylelint" },
+                yaml = { { "yamlfmt", "yamlfix" } },
+                ["*"] = { "codespell" },
+            },
+        },
+    },
 }

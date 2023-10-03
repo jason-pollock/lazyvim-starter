@@ -4,11 +4,15 @@ return {
 
     {
         "folke/tokyonight.nvim",
-        lazy = true,
+        lazy = false,
+        priority = 1000,
         opts = { style = "moon" },
+        config = function()
+            vim.cmd([[colorscheme tokyonight]])
+        end,
     },
 
-    { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
+    -- { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
 
     {
         "catppuccin/nvim",
@@ -50,7 +54,7 @@ return {
         opts = {
             -- colorscheme = "catppuccin",
             -- colorscheme = "gruvbox",
-            colorscheme = "tokyonight",
+            -- colorscheme = "tokyonight",
             -- colorscheme = "nightfly",
         },
     },
