@@ -89,7 +89,7 @@ return {
                             },
                             files = {
                                 exclude = {
-                                    "**/vendor/**",
+                                    -- "**/vendor/**",
                                 },
                             },
                         },

@@ -290,16 +290,23 @@ return {
             }
         end,
     },
-    -- This is the same as running `require('Sessions').setup()` with no parameters
     {
         "echasnovski/mini.sessions",
+        event = { "BufreeadPres", "BufNewFile" },
+        -- This is the same as running `require('Sessions').setup()` with no parameters
         config = true,
     },
-    -- Alternative way to fire `.setup`
     {
+        -- Alternative way to fire `.setup`
         "nvim-lualine/lualine.nvim",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons"
+        },
         config = function()
-            require("lualine").setup({
+            local lualine = require("lualine")
+            -- can do vim. things here
+            vim.g.loaded_netrw = 1
+            lualine.setup({
                 options = {
                     icons_enabled = false,
                     theme = "onedark",
@@ -322,7 +329,7 @@ return {
     },
     {
         "akinsho/bufferline.nvim",
-        opts = { -- Equivelant to `require(bufferline).setup(opts)`
+        opts = { -- Equivalent to `require(bufferline).setup(opts)`
             options = {
                 diagnostics = "nvim_lsp",
                 always_show_bufferline = false,
